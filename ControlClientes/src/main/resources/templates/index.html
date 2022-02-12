@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org">  <!--  manejar informaicion dinamica -->
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>INICIO</h1>
+    <a th:href="@{/agregar}">Crear </a> <!-- crear enlace con en el path agregar -->
+    <div th:if="${personas != null and !personas.empty}">
+        <table border = 1>
+            <tr>
+                <th>Noombre</th>
+                <th>Apellido</th>
+                <th>celular</th>
+                <th>Email</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>   
+
+            <tr th:each="iteradorPersona : ${personas}">
+                <td th:text="${iteradorPersona.nombre}"> Mostrar nombre</td>  <!-- td: table data - tr: table row -->           
+                <td th:text="${iteradorPersona.apellido}"> Mostrar apellido</td>                
+                <td th:text="${iteradorPersona.telefono}"> </td>
+                <td th:text="${iteradorPersona.email}"> Mostrar email</td>
+
+                <td> <a th:href="@{/editar/} + ${iteradorPersona.idPersona}" th:text="Editar" /> </td> <!-- PATH VARIABLE -->
+                <td> <a th:href="@{/eliminar/} + ${iteradorPersona.idPersona}" th:text="Elimiar" /> </td>
+            </tr>                                          
+        </table>
+    </div>
+    <div th:if="${personas == null or personas.empty}">
+        Eror: la lista de persona está vacía
+
+    </div>
+
+</body>
+</html>
